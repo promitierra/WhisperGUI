@@ -89,14 +89,13 @@ def versionCheck(ori): # Obtener version de la aplicación
         response = urllib.request.urlopen(url)
         fetchVersion = response.read().decode('utf-8')
         if fetchVersion != "ver 1.7":
-            checkVisitGithub = messagebox.askquestion(title="有新版本", message="目前最新版本為%s\n請問您是否想前往GitHub下載最新版本"%(fetchVersion))
+            checkVisitGithub = messagebox.askquestion(title="Hay una nueva versión disponible", message="La versión más reciente actualmente es:%s\n¿Desea ir a...?GitHubDescargar la última versión"%(fetchVersion))
+            # checkVisitGithub = messagebox.askquestion(title="有新版本", message="目前最新版本為%s\n請問您是否想前往GitHub下載最新版本"%(fetchVersion))
             if checkVisitGithub == 'yes':
                 callback("https://github.com/ADT109119/WhisperGUI")
         elif ori == 1:
-            messagebox.showinfo(title="訊息", message="目前版本為最新")
-
-    except:
-        print("無法獲取版本資訊")
+            messagebox.showinfo(title="Error", message="La versión actual es la mas reciente"):
+        print("No se puede obtener la información de la versión.") # 無法獲取版本資訊
 
 def saveConfig(key, value):
     global config
@@ -108,7 +107,7 @@ def saveConfig(key, value):
 def process():
     # File = displayAudioFilePath.get(0)
     if displayAudioFilePath.size() == 0:
-        messagebox.showerror(title="錯誤", message='未選擇音檔')
+        messagebox.showerror(title="", message='未選擇音檔')
         return 0
 
     start = time.time()
