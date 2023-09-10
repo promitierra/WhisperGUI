@@ -24,7 +24,7 @@ def callback(url):
 
 
 def selectPhotoFolder():
-    outputDir = easygui.diropenbox("字幕存放資料夾")
+    outputDir = easygui.diropenbox("Directorio de Almacenamiento de Subtítulos") # 字幕存放資料夾
     output_dir.delete(0, 'end')
     output_dir.insert(0, outputDir)
     config["outputDir"] = outputDir
@@ -37,7 +37,7 @@ def selectAudioFile():
     paths = filedialog.askopenfilenames()
     for path in paths:
         displayAudioFilePath.insert(END, path)
-    # File = easygui.fileopenbox("選擇音檔檔案")
+    # File = easygui.fileopenbox("Seleccionar Archivo de Audio") # 選擇音檔檔案
     # displayAudioFilePath.delete(0, 'end')
     # displayAudioFilePath.insert(0, File)
     
@@ -83,7 +83,7 @@ def modelChange(index, value, op):
     # with open('config.json', 'w', encoding='utf8') as f:
     #     json.dump(config, f)
 
-def versionCheck(ori): # fetch app version
+def versionCheck(ori): # Obtener version de la aplicación
     try:
         url = 'https://raw.githubusercontent.com/ADT109119/WhisperGUI/main/version.txt'
         response = urllib.request.urlopen(url)
