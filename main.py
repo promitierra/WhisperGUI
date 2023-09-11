@@ -107,7 +107,7 @@ def saveConfig(key, value):
 def process():
     # File = displayAudioFilePath.get(0)
     if displayAudioFilePath.size() == 0:
-        messagebox.showerror(title="", message='未選擇音檔')
+        messagebox.showerror(title="Error", message='Archivo de audio no seleccionado') #未選擇音檔
         return 0
 
     start = time.time()
@@ -121,7 +121,7 @@ def process():
 
         languageInput = usingLanguage.get()
 
-        if languageInput != "自動偵測":
+        if languageInput != "Detección automática": # 自動偵測
             commandStr = commandStr + " --language %s "%languageInput
 
         deviceInput = deviceDecode()
@@ -140,7 +140,7 @@ def process():
 
         commandStr = commandStr + " --model_dir %s "%("model")
 
-        if translateToEnglishVar.get() == '1':
+        if translateToSpanishVar.get() == '1':
             commandStr = commandStr + " --task %s "%("translate")
 
 
@@ -154,11 +154,12 @@ def process():
 
     end = time.time()
 
-    messagebox.showinfo(title="訊息", message="處理完成\n花費時間%.2f秒"%(end-start))
+    messagebox.showinfo(title="Mensaje", message="Procesado completado\nTiempo empleado%.2fsegundos"%(end-start))
+    # messagebox.showinfo(title="訊息", message="處理完成\n花費時間%.2f秒"%(end-start))
     #outputPreviewVar.set(out)
     #print(out)
 
-# cinfig
+# config
 config = {
     "outputDir": os.getcwd() + "\\output",
     "usingModel": 2,
@@ -197,7 +198,7 @@ selectAudioFileButton.place(x=510, y=50)
 
 
 
-label2 = tk.Label(text='字幕存放資料夾')
+label2 = tk.Label(text='carpeta de almacenamiento de subtítulos') # 字幕存放資料夾
 label2.place(x=0, y=30+heightFix_1)
 output_dir = tk.Entry(width=55)
 output_dir.place(x=120, y=30+heightFix_1)
@@ -206,11 +207,12 @@ selectPhotoPathButton = tk.Button(text='....', command=selectPhotoFolder)
 selectPhotoPathButton.place(x=500, y=30+heightFix_1)
 
 outputToTheSamePathAsInputVar = tk.StringVar()
-outputToTheSamePathAsInput = tk.Checkbutton(text="檔案輸出到與個別輸入檔案相同位置", variable=outputToTheSamePathAsInputVar, onvalue="1", offvalue="0")
+outputToTheSamePathAsInput = tk.Checkbutton(text="Exportar el archivo en la misma ubicación que los archivos de entrada individuales", variable=outputToTheSamePathAsInputVar, onvalue="1", offvalue="0")
+# outputToTheSamePathAsInput = tk.Checkbutton(text="檔案輸出到與個別輸入檔案相同位置", variable=outputToTheSamePathAsInputVar, onvalue="1", offvalue="0")
 outputToTheSamePathAsInput.deselect()
 outputToTheSamePathAsInput.place(x=300, y=60+heightFix_1)
 
-label_usingModel = tk.Label(text='使用模型')
+label_usingModel = tk.Label(text='Utilizar el modelo') # 使用模型
 label_usingModel.place(x=0, y=60+heightFix_1)
 var = tk.StringVar()
 var.trace("w", modelChange)
@@ -220,7 +222,7 @@ usingModel['value'] = models
 usingModel.current(config["usingModel"])
 usingModel.place(x=60, y=60+heightFix_1)
 
-label_usingDevice = tk.Label(text='使用裝置')
+label_usingDevice = tk.Label(text='Utilizar el dispositivo') # 使用裝置
 label_usingDevice.place(x=0, y=90+heightFix_1)
 deviceVar = tk.StringVar()
 deviceVar.trace("w", deviceChange)
@@ -231,7 +233,7 @@ detectAvailableDevice()
 usingDevice.current(config["usingDevice"])
 usingDevice.place(x=60, y=90+heightFix_1)
 
-label_language = tk.Label(text='辨識語言')
+label_language = tk.Label(text='Reconocimiento de idioma') # 辨識語言
 label_language.place(x=0, y=120+heightFix_1)
 languageVar = tk.StringVar()
 languageVar.trace("w", languageChange)
@@ -241,19 +243,19 @@ usingLanguage['value'] = languages
 usingLanguage.current(config["transcribeLanguage"])
 usingLanguage.place(x=60, y=120+heightFix_1)
 
-translateToEnglishVar = tk.StringVar()
-translateToEnglish = tk.Checkbutton(text="將輸出字幕翻譯為英文", variable=translateToEnglishVar, onvalue="1", offvalue="0")
+translateToSpanishVar = tk.StringVar()
+translateToEnglish = tk.Checkbutton(text="Traducir los subtítulos de salida al español", variable=translateToSpanishVar, onvalue="1", offvalue="0")
 translateToEnglish.deselect()
 translateToEnglish.place(x=0, y=150+heightFix_1)
 
-initial_prompt_label = tk.Label(text='內容提示詞')
+initial_prompt_label = tk.Label(text='Palabra clave o indicador de contenido')
 initial_prompt_label.place(x=0, y=180+heightFix_1)
 initial_prompt = tk.Entry(width=55)
 initial_prompt.place(x=80, y=180+heightFix_1)
 
 label_copyright = tk.Label(text='MIT License')
 label_copyright.place(x=0, y=210+heightFix_1)
-label_author = tk.Label(text='製作: The Walking Fish')
+label_author = tk.Label(text='Producción: The Walking Fish')
 label_author.bind("<Button-1>", lambda e: callback("https://www.youtube.com/@the_walking_fish"))
 label_author.place(x=0, y=230+heightFix_1)
 
